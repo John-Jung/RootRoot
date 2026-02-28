@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Terminal Dark Theme -->
+    <color name="bg_primary">#FF0A0E14</color>
+    <color name="bg_card">#FF131920</color>
+    <color name="bg_card_expanded">#FF0F1419</color>
+    <color name="border_card">#FF1E2A35</color>
+    <color name="border_active">#FF00FF41</color>
+
+    <!-- Terminal Colors -->
+    <color name="terminal_green">#FF00FF41</color>
+    <color name="terminal_red">#FFFF3333</color>
+    <color name="terminal_amber">#FFFFB000</color>
+    <color name="terminal_cyan">#FF00E5FF</color>
+    <color name="terminal_dim">#FF4A5568</color>
+    <color name="terminal_text">#FFCBD5E1</color>
+    <color name="terminal_text_bright">#FFEEF2FF</color>
+    <color name="terminal_muted">#FF6B7B8D</color>
+
+    <!-- Status Colors -->
+    <color name="status_pass">#FF00FF41</color>
+    <color name="status_fail">#FFFF3333</color>
+    <color name="status_pending">#FF4A5568</color>
+    <color name="status_running">#FFFFB000</color>
+
+    <!-- Scanline overlay -->
+    <color name="scanline">#08FFFFFF</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
