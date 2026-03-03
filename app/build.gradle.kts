@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.android.rootroot"
+    namespace = "io.github.johnjung.rootroot"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.android.rootroot"
+        applicationId = "io.github.johnjung.rootroot"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -64,4 +64,3 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
-

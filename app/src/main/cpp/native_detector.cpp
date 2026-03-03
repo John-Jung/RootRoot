@@ -1,5 +1,5 @@
 // native_detector.cpp — Pure C I/O (no C++ STL dependency)
-// Package: com.android.rootroot
+// Package: io.github.johnjung.rootroot
 
 #include <jni.h>
 #include <stdio.h>
@@ -32,7 +32,7 @@ static const int SU_PATHS_COUNT = 7;
 // ================================================================
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_com_android_rootroot_NativeDetector_checkSuExistsStatic(JNIEnv *env, jclass clazz) {
+Java_io_github_johnjung_rootroot_NativeDetector_checkSuExistsStatic(JNIEnv *env, jclass clazz) {
     for (int i = 0; i < SU_PATHS_COUNT; i++) {
         if (access(SU_PATHS[i], F_OK) == 0) return JNI_TRUE;
     }
@@ -40,7 +40,7 @@ Java_com_android_rootroot_NativeDetector_checkSuExistsStatic(JNIEnv *env, jclass
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_com_android_rootroot_NativeDetector_checkMagiskMountStatic(JNIEnv *env, jclass clazz) {
+Java_io_github_johnjung_rootroot_NativeDetector_checkMagiskMountStatic(JNIEnv *env, jclass clazz) {
     FILE* f = fopen("/proc/mounts", "r");
     if (!f) return JNI_FALSE;
 
@@ -56,7 +56,7 @@ Java_com_android_rootroot_NativeDetector_checkMagiskMountStatic(JNIEnv *env, jcl
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_com_android_rootroot_NativeDetector_checkFridaProcessStatic(JNIEnv *env, jclass clazz) {
+Java_io_github_johnjung_rootroot_NativeDetector_checkFridaProcessStatic(JNIEnv *env, jclass clazz) {
     DIR* dir = opendir("/proc");
     if (!dir) return JNI_FALSE;
 
@@ -85,7 +85,7 @@ Java_com_android_rootroot_NativeDetector_checkFridaProcessStatic(JNIEnv *env, jc
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_com_android_rootroot_NativeDetector_checkFridaLibraryStatic(JNIEnv *env, jclass clazz) {
+Java_io_github_johnjung_rootroot_NativeDetector_checkFridaLibraryStatic(JNIEnv *env, jclass clazz) {
     FILE* f = fopen("/proc/self/maps", "r");
     if (!f) return JNI_FALSE;
 
@@ -197,7 +197,7 @@ static void* getHiddenHandle() {
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_com_android_rootroot_NativeDetector_checkSuExistsDlsym(JNIEnv *env, jclass clazz) {
+Java_io_github_johnjung_rootroot_NativeDetector_checkSuExistsDlsym(JNIEnv *env, jclass clazz) {
     LOGD("checkSuExistsDlsym called");
     void* handle = getHiddenHandle();
     if (!handle) return JNI_FALSE;
@@ -209,7 +209,7 @@ Java_com_android_rootroot_NativeDetector_checkSuExistsDlsym(JNIEnv *env, jclass 
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_com_android_rootroot_NativeDetector_checkMagiskMountDlsym(JNIEnv *env, jclass clazz) {
+Java_io_github_johnjung_rootroot_NativeDetector_checkMagiskMountDlsym(JNIEnv *env, jclass clazz) {
     void* handle = getHiddenHandle();
     if (!handle) return JNI_FALSE;
 
@@ -220,7 +220,7 @@ Java_com_android_rootroot_NativeDetector_checkMagiskMountDlsym(JNIEnv *env, jcla
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
-Java_com_android_rootroot_NativeDetector_checkFridaDlsym(JNIEnv *env, jclass clazz) {
+Java_io_github_johnjung_rootroot_NativeDetector_checkFridaDlsym(JNIEnv *env, jclass clazz) {
     void* handle = getHiddenHandle();
     if (!handle) return JNI_FALSE;
 
@@ -240,7 +240,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
         return JNI_ERR;
     }
 
-    jclass clazz = env->FindClass("com/android/rootroot/NativeDetector");
+    jclass clazz = env->FindClass("io/github/johnjung/rootroot/NativeDetector");
     if (clazz == NULL) {
         LOGE("FindClass failed");
         return JNI_ERR;
