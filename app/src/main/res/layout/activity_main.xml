@@ -7,43 +7,63 @@
     android:fitsSystemWindows="true">
 
     <!-- Header -->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:paddingHorizontal="20dp"
         android:paddingTop="48dp"
         android:paddingBottom="8dp">
 
-        <!-- Terminal prompt style title -->
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="root@device:~#"
-            android:textColor="@color/terminal_green"
-            android:textSize="12sp"
-            android:fontFamily="monospace" />
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="RootRoot"
-            android:textColor="@color/terminal_text_bright"
-            android:textSize="28sp"
-            android:fontFamily="monospace"
-            android:textStyle="bold"
-            android:paddingTop="4dp" />
+            <!-- Terminal prompt style title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="root@device:~#"
+                android:textColor="@color/terminal_green"
+                android:textSize="12sp"
+                android:fontFamily="monospace" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RootRoot"
+                android:textColor="@color/terminal_text_bright"
+                android:textSize="28sp"
+                android:fontFamily="monospace"
+                android:textStyle="bold"
+                android:paddingTop="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Security Detection Toolkit v1.0"
+                android:textColor="@color/terminal_dim"
+                android:textSize="13sp"
+                android:fontFamily="monospace"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <!-- Settings Button top-right -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Security Detection Toolkit v1.0"
+            android:id="@+id/btnSettings"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="8dp"
+            android:text="⚙"
+            android:textSize="22sp"
             android:textColor="@color/terminal_dim"
-            android:textSize="13sp"
             android:fontFamily="monospace"
-            android:paddingTop="2dp" />
+            android:gravity="center" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <!-- Scan Button -->
     <LinearLayout

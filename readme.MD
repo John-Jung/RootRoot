@@ -2,6 +2,10 @@
 
 > Android Security Detection Toolkit — Root, Magisk & Frida detection across multiple JNI registration strategies
 
+## Installation
+
+- [Play Store](https://play.google.com/store/apps/details?id=io.github.johnjung.rootroot&hl=ko)
+
 ## Overview
 
 **RootRoot** is an open-source Android security research tool that demonstrates how mobile applications detect rooted devices, Magisk installations, and Frida instrumentation frameworks. It implements **13 detection checks** across **4 distinct JNI registration strategies**, making it an educational resource for understanding both offensive and defensive mobile security techniques.

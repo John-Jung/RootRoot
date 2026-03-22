@@ -2,8 +2,10 @@ package io.github.johnjung.rootroot
 
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -13,6 +15,7 @@ import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.concurrent.thread
@@ -45,7 +48,7 @@ class MainActivity : AppCompatActivity() {
     data class CheckItem(
         val name: String,
         val description: String,
-        val method: String,       // JNI method type hint
+        val method: String,
         var result: Boolean? = null,
         var runTimeMs: Long = 0
     )
@@ -137,9 +140,45 @@ class MainActivity : AppCompatActivity() {
         rootingDetector = RootingDetector(this)
 
         cardsContainer = findViewById(R.id.cardsContainer)
-        btnScanAll = findViewById(R.id.btnScanAll)
-        txtSummary = findViewById(R.id.txtSummary)
-        txtFooter = findViewById(R.id.txtFooter)
+        btnScanAll     = findViewById(R.id.btnScanAll)
+        txtSummary     = findViewById(R.id.txtSummary)
+        txtFooter      = findViewById(R.id.txtFooter)
+
+        // ── Settings popup ────────────────────────────────────
+        val btnSettings = findViewById<TextView>(R.id.btnSettings)
+        btnSettings.setOnClickListener { view ->
+            val popup = PopupMenu(androidx.appcompat.view.ContextThemeWrapper(this, androidx.appcompat.R.style.Theme_AppCompat), view)
+            popup.menu.add(0, 1, 0, "Privacy Policy")
+            popup.menu.add(0, 2, 1, "About")
+            popup.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    1 -> {
+                        val url = "https://www.notion.so/RootRoot-319ccb2d4a1780e69990cabd3955a0d9?source=copy_link" // TODO: replace with your URL
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                        true
+                    }
+                    2 -> {
+                        androidx.appcompat.app.AlertDialog.Builder(this)
+                            .setTitle("RootRoot v1.0")
+                            .setMessage(
+                                "Security Detection Toolkit\n\n" +
+                                        "Demonstrates multiple Android root and Frida detection strategies across 4 layers:\n\n" +
+                                        "☕ Java Layer — PackageManager & filesystem checks\n\n" +
+                                        "⚡ Native Static — Exported JNI symbols\n\n" +
+                                        "🔄 Native Dynamic — RegisterNatives via JNI_OnLoad\n\n" +
+                                        "🔗 Native Dlsym — Obfuscated hidden library\n\n" +
+                                        "Built for security researchers and Android enthusiasts.\n\n" +
+                                        "GitHub: github.com/John-Jung/RootRoot"
+                            )
+                            .setPositiveButton("Close", null)
+                            .show()
+                        true
+                    }
+                    else -> false
+                }
+            }
+            popup.show()
+        }
 
         buildUI()
 
@@ -247,7 +286,6 @@ class MainActivity : AppCompatActivity() {
 
         val holder = CardViewHolder(root, header, title, badge, arrow, body, checkRows)
 
-        // Toggle expand on header click
         header.setOnClickListener { toggleCard(holder) }
 
         return holder
@@ -416,11 +454,9 @@ class MainActivity : AppCompatActivity() {
                 updateCheckRow(card.checkRows[i], result, elapsed)
             }
 
-            // Stagger animation
             Thread.sleep(80)
         }
 
-        // Update card badge
         val detected = cardResults.count { it }
         handler.post {
             if (detected > 0) {

@@ -11,8 +11,8 @@ android {
         applicationId = "io.github.johnjung.rootroot"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 4
+        versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -23,6 +23,7 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags += ""
+                arguments += "-DANDROID_STL=c++_static"  // ← add this line
             }
         }
     }
